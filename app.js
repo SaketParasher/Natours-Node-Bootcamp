@@ -1,49 +1,19 @@
-import { readFileSync, writeFile } from 'fs'
-import { join } from 'path';
 import express from 'express';
-import { error } from 'console';
+import morgan from 'morgan';
 
-const PORT = process.env.PORT
-const app = express();
+import { tourRoutes } from './routes/tourRoutes.js';
+import { userRoutes } from './routes/userRoutes.js';
 
-const natours = JSON.parse(readFileSync(join(import.meta.dirname, 'dev-data/data/tours.json')))
+export const app = express();
 
+// 1. MIDDLEWARES
+if (process.env.NODE_ENV === 'development')
+    app.use(morgan('dev'))
 app.use(express.json())
 
-app.get('/api/v1/natours', (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        data: {
-            natours
-        }
-    })
-})
+// 2. STATIC FILES MIDDLEWARE
+app.use(express.static(`${import.meta.dirname}/public`))
 
-app.post('/api/v1/natours', (req, res) => {
-    const newTourId = natours.length + 1;
-    const newTourData = req.body;
-
-    const newTour = { id: newTourId, ...newTourData }
-    natours.push(newTour)
-    writeFile(join(import.meta.dirname, 'dev-data/data/tours.json'), JSON.stringify(natours), err => {
-        if (err) {
-            console.error(error)
-            return res.status(500).json({
-                status: 'error',
-                message: 'Something Went Wrong!'
-            })
-        }
-
-        res.status(201).json({
-            status: 'success',
-            data: {
-                tour: newTour
-            }
-        })
-    })
-})
-
-
-app.listen(PORT, () => {
-    console.log(`Server Running on PORT: ${PORT}`)
-})
+// 3. ROUTES MIDDLEWARES
+app.use('/api/v1/tours', tourRoutes)
+app.use('/api/v1/users', userRoutes)
