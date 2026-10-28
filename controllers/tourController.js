@@ -1,16 +1,5 @@
-import { readFileSync, writeFile } from 'fs'
-import { join } from 'path';
-const natours = JSON.parse(readFileSync(join(import.meta.dirname, '../dev-data/data/tours-simple.json')))
+import { Tour } from "../models/tourModel.js";
 
-export const validateId = (req, res, next, param) => {
-    if (+param > natours.length - 1) {
-        return res.status(404).json({
-            status: 'failed',
-            message: `No Tour found with ID : ${param}`
-        })
-    }
-    next();
-}
 
 export const validateCreateTourReqBody = (req, res, next) => {
     const reqBody = req.body;
@@ -27,42 +16,47 @@ export const getTours = (req, res) => {
     res.status(200).json({
         status: 'success',
         data: {
-            natours
+            natours: []
         }
     })
 }
 
-export const createTour = (req, res) => {
-    const newTourId = natours.length + 1;
-    const newTourData = req.body;
+export const createTour = async (req, res) => {
 
-    const newTour = { id: newTourId, ...newTourData }
-    natours.push(newTour)
-    writeFile(join(import.meta.dirname, '../dev-data/data/tours.json'), JSON.stringify(natours), err => {
-        if (err) {
-            console.error(err)
-            return res.status(500).json({
-                status: 'error',
-                message: 'Something Went Wrong!'
-            })
-        }
+    try {
+        const newTourData = req.body;
+
+        const tour = new Tour({
+            name: newTourData.name,
+            price: newTourData.price,
+            rating: newTourData.rating
+        })
+
+        const data = await tour.save()
+
+        console.log(data)
 
         res.status(201).json({
             status: 'success',
             data: {
-                tour: newTour
+                tour: []
             }
         })
-    })
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Something Went wrong while creating tour'
+        })
+    }
 }
 
 export const getTour = (req, res) => {
-    const tour = natours.find(tour => tour.id === +req.params.id)
+    const id = +req.params.id
 
     res.status(200).json({
         status: 'success',
         data: {
-            tour
+
         }
     })
 }
