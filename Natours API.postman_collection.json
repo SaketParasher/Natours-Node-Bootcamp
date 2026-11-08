@@ -1,0 +1,306 @@
+{
+  "info": {
+    "_postman_id": "ab85384b-ee4d-4207-b6c5-203882979274",
+    "name": "Natours API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "3798084"
+  },
+  "item": [
+    {
+      "name": "Tours",
+      "item": [
+        {
+          "name": "Get All Tours",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL}}/api/v1/tours",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tours"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a Tour",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"The F\",\r\n    \"duration\": 9,\r\n    \"maxGroupSize\": 20,\r\n    \"difficulty\": \"very easy\",\r\n    \"ratingsAverage\": 6,\r\n    \"ratingsQuantity\": 54,\r\n    \"price\": 1197,\r\n    \"summary\": \"Living the life of Wanderlust in the US' most beatiful cities\",\r\n    \"description\": \"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat lorem ipsum dolor sit amet.\\nConsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat!\",\r\n    \"imageCover\": \"tour-4-cover.jpg\",\r\n    \"images\": [\"tour-4-1.jpg\", \"tour-4-2.jpg\", \"tour-4-3.jpg\"],\r\n    \"startDates\": [\"2021-03-11,10:00\", \"2021-05-02,10:00\", \"2021-06-09,10:00\"]\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL}}/api/v1/tours",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tours"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Tour by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL}}/api/v1/tours/6ae76db928d14fdf5b5fbbd2sdd",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tours",
+                "6ae76db928d14fdf5b5fbbd2sdd"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a Tour",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"price\":\"a22sww\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL}}/api/v1/tours/6ae0f5b11b03ebbad48534f2",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tours",
+                "6ae0f5b11b03ebbad48534f2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a Tour",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{jwt}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{URL}}/api/v1/tours/6ae76db928d14fdf5b5fbbd7",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tours",
+                "6ae76db928d14fdf5b5fbbd7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Tours By Year",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/tours/tours-by-year/2023",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "tours",
+                "tours-by-year",
+                "2023"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Tour Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/tours/tour-stats",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "tours",
+                "tour-stats"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{URL}}/api/v1/users",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signup",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const response = pm.response.json()\r\nconst token = response.token\r\n\r\npm.collectionVariables.set(\"jwt\", token)"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Saket Parasher\",\r\n    \"email\":\"saket.parasher@gmail.com\",\r\n    \"password\":\"Login@12345\",\r\n    \"role\":\"admin\",\r\n    \"passwordConfirm\":\"Login@12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL}}/api/v1/users/signup",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const response = pm.response.json()\r\nconst token = response.token\r\n\r\npm.collectionVariables.set(\"jwt\", token)"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"saket.parasher@gmail.com\",\r\n    \"password\":\"Login@12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{URL}}/api/v1/users/login",
+              "host": [
+                "{{URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "jwt",
+      "value": ""
+    }
+  ]
+}
