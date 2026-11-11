@@ -86,11 +86,17 @@ userSchema.methods.passwordUpdatedAfterTokenIssue = function (tokenIssuedAt) {
   return passwordUpdatedAt > tokenIssuedAt * 1000;
 };
 
+// we are generating password reset token and returning it to send the user in the mail
+// we are also creating a password reset hash and password reset expires at 10 minutes after 
+// generating it and saving it in the DB.
 userSchema.methods.createPasswordResetToken = function () {
   const randomPasswordResetToken = randomBytes(32).toString('hex');
   this.passwordResetHash = createHash('sha256')
     .update(randomPasswordResetToken)
     .digest('hex');
+
+  this.passwordResetExpiresAt = Date.now() + 10 * 60 * 1000;
+  return randomPasswordResetToken
 };
 
 export const User = model('user', userSchema);

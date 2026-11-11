@@ -1,11 +1,14 @@
 import { Router } from "express";
 import { createUser, deleteUser, getUser, getUsers, updateUser } from '../controllers/userController.js';
-import { Signup, Signin } from "../controllers/authController.js";
+import { Signup, Signin, forgotPassword, verifyAuth, resetPassword, updatePassword } from "../controllers/authController.js";
 
 export const userRoutes = Router();
 
 userRoutes.post('/signup', Signup);
 userRoutes.post('/login', Signin);
+userRoutes.post('/forgotpassword', forgotPassword);
+userRoutes.patch('/resetpassword/:resetToken', resetPassword);
+userRoutes.patch('/updatepassword', verifyAuth, updatePassword);
 
 userRoutes.route('/')
     .get(getUsers)
